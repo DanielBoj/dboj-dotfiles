@@ -1,0 +1,14 @@
+;; Configuration to remap caps to esc+lctrl
+(defcfg)
+
+(defsrc
+  caps 
+ )
+
+(deflayer default
+ @escctrl
+)
+
+(defalias 
+  escctrl (tap-hold 200 200 esc lctrl)
+)
