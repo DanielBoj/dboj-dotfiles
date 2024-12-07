@@ -615,7 +615,7 @@ require("lazy").setup({
 				--    https://github.com/pmizio/typescript-tools.nvim
 				--
 				-- But for many setups, the LSP (`tsserver`) will work just fine
-				tsserver = {},
+				-- tsserver = {},
 				--
 
 				lua_ls = {
@@ -857,6 +857,15 @@ require("lazy").setup({
 			-- - sd'   - [S]urround [D]elete [']quotes
 			-- - sr)'  - [S]urround [R]eplace [)] [']
 			require("mini.surround").setup()
+
+			-- Comment/uncomment lines
+			require("mini.comment").setup()
+
+			-- Add/Remove/Replace brackets, quotes, etc.
+			require("mini.bracketed").setup()
+
+			-- Render colors in code
+			require("mini.hipatterns").setup()
 
 			-- Simple and easy statusline.
 			--  You could remove this setup call if you don't like it,

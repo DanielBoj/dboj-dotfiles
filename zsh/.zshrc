@@ -5,9 +5,9 @@
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p9k-instant-prompt-${(%):-%n}.zsh"
 # fi
 
-POWERLEVEL8K_INSTANT_PROMPT=off
+# POWERLEVEL8K_INSTANT_PROMPT=off
 
-POWERLEVEL8K_INSTANT_PROMPT=quiet
+# POWERLEVEL8K_INSTANT_PROMPT=quiet
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -48,7 +48,6 @@ zinit snippet OMZP::command-not-found
 # Replay old cached completions
 zinit cdreplay -q
 
-
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -59,7 +58,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -128,7 +128,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # )
 
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -181,6 +181,8 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 # Java Paths
 export JAVA_HOME=/usr/lib/jvm/jre-23-openjdk/
 export PATH=$PATH:$JAVA_HOME/bin
+# Tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -215,17 +217,24 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
 
+# Starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
 # Shell Integrations
 # FZF
 eval "$(fzf --zsh)"
 
 #ZOxide
 eval "$(zoxide init zsh)"
-fastfetch
 
 # The Fuck -> Command auto correction with alias fck
 eval "$(thefuck -a fk)"
 
+# Tmuxifier
+eval "$(tmuxifier init -)"
+
 # Welcome message
+fastfetch
 echo "Welcome to the Matrix, Neo!"
 
