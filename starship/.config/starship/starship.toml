@@ -2,15 +2,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 palette = 'catppuccin_mocha'
-format = """ 
- $os \
+format = """ $os \
 $username  $directory\
 $git_branch$git_status\
 $fill\
 $all\
 $line_break \
-$character
-"""
+$character"""
 
 [fill]
 symbol = ' '
@@ -77,7 +75,7 @@ disabled = false
 symbol = "󰏗 "
 
 [directory]
-style = 'bold lavander'
+style = 'bold pink'
 truncation_length = 4
 truncation_symbol = "…/"
 
@@ -103,10 +101,11 @@ ssh_only = true
 [git_branch]
 symbol = ""
 style = 'bold mauve'
-format = '[$symbol $branch]($style)'
+format = '[on](sky) [$symbol $branch]($style)'
 
 [git_status]
-style = 'bold mauve'
+style = 'bold sky'
+format = '([$all_status$aheah_behind]($style) )'
 
 [kubernetes]
 symbol = ""
@@ -120,16 +119,18 @@ format = 'via [$symbol $context](blue bold)'
 [aws]
 style = 'peach'
 symbol = ""
-format = '[ on $symbol ($profile)(\($region\) )]($style)'
+format = '[ $symbol ($profile) 󰮭 ($region)(\[$duration\] )]($style)'
 
 [nodejs]
 symbol = ""
 format = '[ $symbol ($version) ]($style)'
 
 [python]
-style = 'yellow'
+style = 'teal'
 symbol = ""
 format = '[ $symbol ($version) ]($style)'
+pyenv_version_name = true
+pyenv_prefix = ""
 
 [kotlin]
 style = 'sapphire'
@@ -161,6 +162,14 @@ format = '[ $symbol ($version) ]($style)'
 
 [cmd_duration]
 style = 'sky'
+min_time = 500
+format = ' [$duration]($style)'
+
+[jobs]
+symbol = ""
+style = 'rosewater'
+number_threshold = 1
+format = '[$symbol]($style)'
 
 [time]
 disabled = false

@@ -275,20 +275,34 @@ require("lazy").setup({
 
 	-- Here is a more advanced example where we pass configuration
 	-- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-	--    require('gitsigns').setup({ ... })
+	-- require('gitsigns').setup({ ... )
 	--
 	-- See `:help gitsigns` to understand what the configuration keys do
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-			},
-		},
+		config = function()
+			require("gitsigns").setup({
+				signs = {
+					add = { text = "+" },
+					change = { text = "~" },
+					delete = { text = "_" },
+					topdelete = { text = "‾" },
+					changedelete = { text = "~" },
+				},
+			})
+			vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Preview [G]it [P]atch" })
+			vim.keymap.set(
+				"n",
+				"<leader>gtc",
+				":Gitsigns toggle_current_line_blame<CR>",
+				{ desc = "Toggle [G]it [T]oggle [C]urrent line blame" }
+			)
+		end,
+	},
+
+	{
+		"tpope/vim-fugitive",
+		config = function() end,
 	},
 
 	-- NOTE: Plugins can also be configured to run Lua code when they are loaded.
@@ -943,7 +957,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			--"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		opts = {
 
@@ -1124,6 +1138,21 @@ require("lazy").setup({
 		vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>"),
 		vim.keymap.set("n", "<leader>tg", "<cmd>TestVisit<CR>"),
 		vim.cmd("let test#strategy = 'vimux'"),
+	},
+
+	-- Luarocks
+	{
+		"vhyrro/luarocks.nvim",
+		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+		opts = {
+			rocks = { "magick" },
+		},
+	},
+
+	{
+		"3rd/image.nvim",
+		dependencies = { "luarocks.nvim" },
+		opts = {},
 	},
 
 	-- Themes
