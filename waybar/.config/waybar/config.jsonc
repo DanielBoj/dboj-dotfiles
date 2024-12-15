@@ -11,6 +11,7 @@
     "memory", 
     "temperature", 
     "hyprland/language",
+    "custom/power",
   ],
   "clock": {
     "format": "<span foreground='#f5c2e7'></span>{:%a %d %H:%M}",
@@ -91,12 +92,16 @@
     "format-icons": ["", ""]
   },
   "backlight": {
-    // "device": "acpi_video1",
+    "device": "HDMI-A-3",
     "format": "{percent}% {icon}",
     "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"]
   },
   "hyprland/language": {
-    "format": "<span size='13000' foreground='#f5e0dc'>{short} {variant}</span>",
-    "on-click": "hyprctl switchxkblayout"
+    "format": "<span size='13000' foreground='#f5e0dc'>{short}</span>",
+    "on-click": "hyprctl switchxkblayout keyboard-v1 next"
+  },
+  "custom/power": {
+    "format":"",
+    "on-click":"wlogout --protocol layer-shell" 
   },
 }

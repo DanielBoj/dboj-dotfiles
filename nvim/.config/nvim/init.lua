@@ -113,7 +113,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -322,25 +322,21 @@ require("lazy").setup({
 
 	{ -- Useful plugin to show you pending keybinds.
 		"folke/which-key.nvim",
-		event = "VimEnter", -- Sets the loading event to 'VimEnter'
-		config = function() -- This is the function that runs, AFTER loading
-			require("which-key").setup()
-
-			-- Document existing key chains
-			require("which-key").register({
-				["<leader>c"] = { name = "[C]ode", _ = "which_key_ignore" },
-				["<leader>d"] = { name = "[D]ocument", _ = "which_key_ignore" },
-				["<leader>r"] = { name = "[R]ename", _ = "which_key_ignore" },
-				["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
-				["<leader>w"] = { name = "[W]orkspace", _ = "which_key_ignore" },
-				["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-				["<leader>h"] = { name = "Git [H]unk", _ = "which_key_ignore" },
-			})
-			-- visual mode
-			require("which-key").register({
-				["<leader>h"] = { "Git [H]unk" },
-			}, { mode = "v" })
-		end,
+		event = "VeryLazy",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
+		},
 	},
 
 	-- NOTE: Plugins can specify dependencies.
@@ -957,7 +953,7 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			--"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 		opts = {
 
@@ -1144,15 +1140,10 @@ require("lazy").setup({
 	{
 		"vhyrro/luarocks.nvim",
 		priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+		config = true,
 		opts = {
 			rocks = { "magick" },
 		},
-	},
-
-	{
-		"3rd/image.nvim",
-		dependencies = { "luarocks.nvim" },
-		opts = {},
 	},
 
 	-- Themes
@@ -1251,6 +1242,28 @@ require("lazy").setup({
 			lazy = "💤 ",
 		},
 	},
+})
+
+-- Whichkey maps
+local wk = require("which-key")
+wk.add({
+	-- Document existing key chains
+	{ "<leader>c", group = "[C]ode" },
+	{ "<leader>c_", hidden = true },
+	{ "<leader>d", group = "[D]ocument" },
+	{ "<leader>d_", hidden = true },
+	{ "<leader>h", group = "Git [H]unk" },
+	{ "<leader>h_", hidden = true },
+	{ "<leader>r", group = "[R]ename" },
+	{ "<leader>r_", hidden = true },
+	{ "<leader>s", group = "[S]earch" },
+	{ "<leader>s_", hidden = true },
+	{ "<leader>t", group = "[T]oggle" },
+	{ "<leader>t_", hidden = true },
+	{ "<leader>w", group = "[W]orkspace" },
+	{ "<leader>w_", hidden = true },
+	-- visual mode
+	{ "<leader>h", group = "Git [H]unk", mode = "v" },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
