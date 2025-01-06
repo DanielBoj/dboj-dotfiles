@@ -171,7 +171,7 @@ alias vim-s="nvim --listen /tmp/nvimsocket"
 
 # Custom PATHs
 # Kanata in Cargo 
-export PATH=$PATH:/home/dboj/.cargo/bin
+export PATH=$PATH:/usr/bin/kanata
 # Android Paths
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
@@ -218,8 +218,10 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls $realpath'
 
 # Starship
+prompt off
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+source ~/starship-prompt.zsh
 
 # Shell Integrations
 # FZF
