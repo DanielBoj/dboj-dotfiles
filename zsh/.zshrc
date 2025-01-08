@@ -169,6 +169,10 @@ alias la="ls -la"
 alias cd="z"
 alias vim-s="nvim --listen /tmp/nvimsocket"
 
+# Execute VPN connection script
+alias wdon="/home/dboj/.config/ovpn-clients/vpn-on.sh"
+alias wdoff="/home/dboj/.config/ovpn-clients/vpn-off.sh"
+
 # Custom PATHs
 # Kanata in Cargo 
 export PATH=$PATH:/usr/bin/kanata
