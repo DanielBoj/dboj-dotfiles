@@ -51,6 +51,9 @@ zinit cdreplay -q
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+export PATH=$PATH:/home/dboj/.local/bin
+export $(envsubst < /home/dboj/.config/.env)
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -141,7 +144,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -240,7 +243,16 @@ eval "$(thefuck -a fk)"
 # Tmuxifier
 eval "$(tmuxifier init -)"
 
+# Pipx
+export PATH=$PATH:/usr/bin/pipx
+eval "$(register-python-argcomplete pipx)"
+
+# Jupyter pipx installation
+export PATH=$PATH:/home/dboj/.local/share/pipx/venvs/notebook/bin
+
 # Welcome message
 fastfetch
 echo "Welcome to the Matrix, Neo!"
 
+# Tmux initializer
+/home/dboj/workspace/bash-scripts/init-tmux.sh

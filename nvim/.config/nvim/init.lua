@@ -113,7 +113,7 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = { 'unnamed', 'unnamedplus' }
+vim.opt.clipboard = { "unnamed", "unnamedplus" }
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -227,6 +227,18 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank()
+	end,
+})
+
+-- Autosave files when focus is lost
+--  See `:help 'autowrite'`
+vim.opt.autowrite = true
+vim.api.nvim_create_autocmd("FocusLost", {
+	desc = "Autosave files when focus is lost",
+	group = vim.api.nvim_create_augroup("kickstart-autosave", { clear = true }),
+	pattern = "*",
+	callback = function()
+		vim.cmd("silent! wa")
 	end,
 })
 
@@ -1134,6 +1146,14 @@ require("lazy").setup({
 		vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>"),
 		vim.keymap.set("n", "<leader>tg", "<cmd>TestVisit<CR>"),
 		vim.cmd("let test#strategy = 'vimux'"),
+	},
+
+	-- Edit sudo files
+	{
+		"lambdalisue/suda.vim",
+		config = function()
+			vim.cmd("let g:suda_smart_edit = 1")
+		end,
 	},
 
 	-- Luarocks
