@@ -1,7 +1,7 @@
 #!/bin/bash
-sleep 2
+sleep 1
 
-while true; do 
+#while true; do 
     wallpaper=$(find -L /home/dboj/Pictures/wp/cycle_wp -type f | shuf -n 1)
     hyprctl hyprpaper preload $wallpaper
     
@@ -9,5 +9,5 @@ while true; do
     hyprctl hyprpaper wallpaper ,$wallpaper 
     notify-send -i "Wallpaper changed"
     
-    sleep 1h
-done
+#    sleep 1h
+#done

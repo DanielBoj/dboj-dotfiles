@@ -166,6 +166,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+# MPD Socket
+export MPD_HOST=/home/dboj/.config/mpd/socket
+
 # Custom alias
 alias zshconfig="nvim ~/.zshrc"
 alias la="ls -la"
@@ -173,8 +176,19 @@ alias cd="z"
 alias vim-s="nvim --listen /tmp/nvimsocket"
 
 # Execute VPN connection script
-alias wdon="/home/dboj/.config/ovpn-clients/vpn-on.sh"
-alias wdoff="/home/dboj/.config/ovpn-clients/vpn-off.sh"
+alias wdon="sudo pon wdreams && sleep 3 && sudo ip route add default via 172.16.0.100 dev ppp0"
+alias wdoff="sudo poff wdreams"
+
+# Pacman update and cleaning
+alias pacup="sudo pacman -Syu --noconfirm && sudo pacman -Sc --noconfirm && sudo pacman -Scc --noconfirm"
+alias yayup="yay -Syu --noconfirm && yay -Sc --noconfirm && yay -Scc --noconfirm"
+
+# Mount units whhen at office VPN
+alias mnt-ryc="sudo mount -aT /home/dboj/Network/mount_tabs/sistemas"
+
+# Warp-Cli Modes
+alias warp="warp-cli mode warp+doh"
+alias doh="warp-cli mode doh"
 
 # Custom PATHs
 # Kanata in Cargo 
@@ -256,3 +270,4 @@ echo "Welcome to the Matrix, Neo!"
 
 # Tmux initializer
 /home/dboj/workspace/bash-scripts/init-tmux.sh
+
